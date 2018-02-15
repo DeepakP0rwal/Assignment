@@ -7,8 +7,8 @@ target 'Assignment' do
   # Pods for Assignment
     use_frameworks!
     
-    pod 'SVProgressHUD'
-    pod 'SDWebImage', '~> 4.0'
+   # pod 'SVProgressHUD'
+   # pod 'SDWebImage', '~> 4.0'
 
   target 'AssignmentTests' do
     inherit! :search_paths

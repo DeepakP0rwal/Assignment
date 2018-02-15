@@ -29,7 +29,6 @@
 }
 
 - (void)callURL:(NSURL *)url withParams:(NSString *)apiKey completionHandler:(WebServiceCallCompletionHandler)handler {
-    [CommonUtils showLoading];
     NSURLRequest *request = [NSURLRequest postRequestWithURL:url parameters:apiKey];
 
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -40,7 +39,6 @@
         
         if (error) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [CommonUtils dismissLoading];
                 handler (FALSE, nil,@"");
             });
         } else {
@@ -49,7 +47,6 @@
             
             if (JSONError) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [CommonUtils dismissLoading];
                     handler (FALSE, nil,@"");
                 });
             } else {
@@ -57,12 +54,11 @@
                 
                 if(responseCode >= 200) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [CommonUtils dismissLoading];
+                       
                         handler(TRUE, result,nil);
                     });
                 } else {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [CommonUtils dismissLoading];
                         [CommonUtils showAlert:kAlertTitle withDetailText:@"Service temporary unavailable" cancelTitle:kAlertTitleOk];
                         handler (FALSE, result,nil);
                     });

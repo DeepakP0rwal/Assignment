@@ -11,7 +11,7 @@
 #import "SVProgressHUD.h"
 
 @interface CommonUtils : NSObject
-+(void)showLoading;
-+(void)dismissLoading;
++(UIActivityIndicatorView*)showLoading:(UIViewController*)viewController;
++(void)dismissLoading:(UIActivityIndicatorView*)activityView;
 + (void)showAlert:(NSString *)title withDetailText:(NSString *)detailText cancelTitle:(NSString *)cancel;
 @end

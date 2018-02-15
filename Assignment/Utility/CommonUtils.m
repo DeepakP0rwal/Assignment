@@ -9,15 +9,19 @@
 #import "CommonUtils.h"
 
 @implementation CommonUtils
-+(void)showLoading{
-    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];
-    [SVProgressHUD setForegroundColor:[UIColor colorWithRed:233/255.0f green:27/255.0f blue:44/255.0f alpha:1.0f]];
-    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
-    [SVProgressHUD showWithStatus:@"Loading..."];
++(UIActivityIndicatorView*)showLoading:(UIViewController*)viewController{
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc]
+                                             initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    
+    activityView.center=viewController.view.center;
+    [activityView setColor:[UIColor blackColor]];
+    [activityView startAnimating];
+    [viewController.view addSubview:activityView];
+    return activityView;
 }
 
-+(void)dismissLoading{
-    [SVProgressHUD dismiss];
++(void)dismissLoading:(UIActivityIndicatorView*)activityView{
+    [activityView stopAnimating];
 }
 
 +(void)showAlert:(NSString *)title withDetailText:(NSString *)detailText cancelTitle:(NSString *)cancel{
